@@ -1,16 +1,7 @@
 <template>
     <div>
-        Money
-        <Nav />
+        <Layout>
+            <p>Money</p>
+        </Layout>
     </div>
 </template>
-
-<script>
-    export default {
-
-    }
-</script>
-
-<style lang="scss" scoped>
-
-</style>
