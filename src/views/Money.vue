@@ -1,91 +1,30 @@
 <template>
     <div>
         <Layout>
-            <p>Money</p>
-
-            <div class="tags">
-                <ul class="list">
-                    <li>衣</li>
-                    <li>食</li>
-                    <li>住</li>
-                    <li>行</li>
-                    <li>衣</li>
-                    <li>食</li>
-                    <li>住</li>
-                    <li>行</li>
-                </ul>
-                <div class="new">
-                    <button>新增标签</button>
-                </div>
-            </div>
-            <div class="notes">
-                <label>
-                    <span>备注</span>
-                    <input type="text" placeholder="在这里添加备注">
-                </label>
-            </div>
-            <div class="types">
-                <ul>
-                    <li class="selected">支出</li>
-                    <li>收入</li>
-                </ul>
-            </div>
-            <div class="numPanel">
-                <div class="output">100</div>
-                <div class="buttons">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>+</button>
-                    <button>back</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6</button>
-                    <button>-</button>
-                    <button>C</button>
-                    <button>7</button>
-                    <button>8</button>
-                    <button>9</button>
-                    <button>*</button>
-                    <button>OK</button>
-                    <button>0</button>
-                    <button>.</button>
-                </div>
-            </div>
+            <Tags/>
+            <Notes/>
+            <Types/>
+            <NumPanel/>
         </Layout>
     </div>
 </template>
 
-<style lang="scss" scoped>
-.tags {
-    font-size: 14px;
-    padding: 16px;
+<script lang="ts">
+import Tags from '@/components/Money/Tags.vue'
+import Notes from '@/components/Money/Notes.vue'
+import Types from '@/components/Money/Types.vue'
+import NumPanel from '@/components/Money/NumPanel.vue'
 
-    .list {
-        display: flex;
-        flex-wrap: wrap;
-
-        li {
-            background: #d9d9d9;
-            height: 24px;
-            line-height: 24px;
-            border-radius: 12px;
-            padding: 0 16px;
-            margin-right: 12px;
-            margin-top: 4px;
-        }
-    }
-
-    .new {
-        padding-top: 16px;
-
-        button {
-            background: transparent;
-            border: none;
-            color: #999;
-            border-bottom: 1px solid;
-            padding: 0 4px;
-        }
+export default {
+    components: {
+        Tags,
+        Notes,
+        Types,
+        NumPanel
     }
 }
+</script>
+
+<style lang="scss" scoped>
+
 </style>
