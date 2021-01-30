@@ -7,22 +7,20 @@
     </div>
 </template>
 
-<script>
-    export default {
-        data() {
-            return {
-                type: '-',
-            }
-        },
+<script lang="ts">
+    import Vue from 'vue'
+    import {Component} from 'vue-property-decorator'
 
-        methods: {
-            changeType(type) {
-                if (type !== '-' && type !== '+') {
-                    throw new Error('Type is not valid!')
-                }
-                this.type = type
+    @Component
+    export default class Types extends Vue {
+        type = '-'
+
+        changeType(type: string) {
+            if (type !== '-' && type !== '+') {
+                throw new Error('Type is not valid!')
             }
-        },
+            this.type = type
+        }
     }
 </script>
 
