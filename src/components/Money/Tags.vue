@@ -29,6 +29,8 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    max-height: 300px;
+    overflow: auto;
 
     .list {
         display: flex;

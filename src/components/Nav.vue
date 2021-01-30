@@ -1,12 +1,12 @@
 <template>
     <nav>
-        <router-link to="/money" class="item" active-class="selected">
-            <Icon icon-name="#gold-coin"/>
-            Money
-        </router-link>
         <router-link to="/labels" class="item" active-class="selected">
             <Icon icon-name="#label"/>
             Labels
+        </router-link>
+        <router-link to="/money" class="item" active-class="selected">
+            <Icon icon-name="#gold-coin"/>
+            Money
         </router-link>
         <router-link to="/statistics" class="item" active-class="selected">
             <Icon icon-name="#balance-list"/>

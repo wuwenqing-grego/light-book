@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Layout>
+        <Layout class-prefix="layout">
             <Tags/>
             <Notes/>
             <Types/>
@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
@@ -25,6 +25,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.layout-content {
+    display: flex;
+    flex-direction: column;
+}
 
+// .layout-wrapper {
+//     border: 1px solid blue;
+// }
 </style>
