@@ -1,15 +1,28 @@
 <template>
     <div>
         <ul class="types">
-            <li class="selected">支出</li>
-            <li>收入</li>
+            <li :class="{ selected: type === '-' }" @click="changeType('-')">支出</li>
+            <li :class="{ selected: type === '+' }" @click="changeType('+')">收入</li>
         </ul>
     </div>
 </template>
 
 <script>
     export default {
-        
+        data() {
+            return {
+                type: '-',
+            }
+        },
+
+        methods: {
+            changeType(type) {
+                if (type !== '-' && type !== '+') {
+                    throw new Error('Type is not valid!')
+                }
+                this.type = type
+            }
+        },
     }
 </script>
 
