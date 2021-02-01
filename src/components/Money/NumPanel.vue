@@ -1,33 +1,69 @@
 <template>
     <div class="numPanel">
-        <div class="output">100</div>
+        <div class="output">{{ output }}</div>
         <div class="buttons">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button @click="typeIn">1</button>
+            <button @click="typeIn">2</button>
+            <button @click="typeIn">3</button>
             <button>+</button>
-            <button>DEL</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
+            <button @click="remove">DEL</button>
+            <button @click="typeIn">4</button>
+            <button @click="typeIn">5</button>
+            <button @click="typeIn">6</button>
             <button>-</button>
-            <button>C</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+            <button @click="clear">C</button>
+            <button @click="typeIn">7</button>
+            <button @click="typeIn">8</button>
+            <button @click="typeIn">9</button>
             <button>*</button>
-            <button class="ok">OK</button>
-            <button>0</button>
-            <button>.</button>
+            <button @click="enter" class="ok">OK</button>
+            <button @click="typeIn">0</button>
+            <button @click="typeIn">.</button>
             <button>%</button>
             <button>/</button>
         </div>
     </div>
 </template>
 
-<script>
-    export default {
-        
+<script lang="ts">
+    import { Vue, Component } from 'vue-property-decorator'
+
+    @Component
+    export default class NumPanel extends Vue{
+        output = '0'
+
+        typeIn(e: MouseEvent) {
+            const text = (e.target as HTMLButtonElement).textContent as string
+
+            if (this.output.length === 16) {
+                return
+            }
+
+            if (this.output === '0') {
+                if (/[0-9]/.test(text)) {
+                    this.output = text
+                    return
+                }
+            }
+
+            if (text === '.' && this.output.includes('.')) {
+                return
+            }
+
+            this.output += text
+        }
+
+        remove() {
+            this.output = this.output.length > 1 ? this.output.slice(0, -1) : '0'
+        }
+
+        clear() {
+            this.output = '0'
+        }
+
+        enter() {
+            console.log('submit')
+        }
     }
 </script>
 
@@ -40,6 +76,7 @@
         padding: 9px 16px;
         text-align: right;
         @extend %innerShadow;
+        height: 72px;
     }
 
     .buttons {
