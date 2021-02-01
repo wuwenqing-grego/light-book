@@ -1,8 +1,8 @@
 <template>
     <div>
         <label class="notes">
-            <span>备注{{note}}</span>
-            <input type="text" :value="note" @input="onInput" placeholder="在这里添加备注">
+            <span>备注</span>
+            <input type="text" v-model="note" placeholder="在这里添加备注">
         </label>
     </div>
 </template>
@@ -13,10 +13,6 @@
     @Component
     export default class Notes extends Vue {
         note = ''
-
-        onInput(e: KeyboardEvent) {
-            this.note = (e.target as HTMLInputElement).value
-        }
     }
 </script>
 
