@@ -1,7 +1,7 @@
 <template>
     <div>
         <Layout class-prefix="layout">
-            <Tags/>
+            <Tags :data-source="tags"/>
             <Notes/>
             <Types/>
             <NumPanel/>
@@ -21,7 +21,13 @@ export default {
         Notes,
         Types,
         NumPanel
-    }
+    },
+
+    data() {
+        return {
+            tags: ['衣', '食', '住', '行', '吃', '喝', '玩', '乐']
+        }
+    },
 }
 </script>
 

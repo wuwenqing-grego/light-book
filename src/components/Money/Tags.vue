@@ -1,14 +1,9 @@
 <template>
     <div class="tags">
         <ul class="list">
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
+            <li v-for="tag in dataSource" :key="tag" 
+            :class="{selected: selectedTags.includes(tag)}"
+            @click="toggle(tag)">{{ tag }}</li>
         </ul>
         <div class="new">
             <button>新增标签</button>
@@ -16,9 +11,18 @@
     </div>
 </template>
 
-<script>
-    export default {
-        
+<script lang="ts">
+    import { Vue, Component, Prop } from 'vue-property-decorator'
+
+    @Component
+    export default class Tags extends Vue{
+        @Prop(Array) dataSource: string[]
+        selectedTags: string[] = []
+
+        toggle(tag: string) {
+            const index = this.selectedTags.indexOf(tag)
+            index >= 0 ? this.selectedTags.splice(index, 1) : this.selectedTags.push(tag)
+        }
     }
 </script>
 
@@ -44,6 +48,11 @@
             padding: 0 16px;
             margin-right: 12px;
             margin-top: 4px;
+
+            &.selected {
+                background: darken(#d9d9d9, 50%);
+                color: white;
+            }
         }
     }
 
