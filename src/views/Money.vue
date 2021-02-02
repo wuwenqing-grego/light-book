@@ -1,7 +1,7 @@
 <template>
     <div>
         <Layout class-prefix="layout">
-            <Tags :data-source="tags"/>
+            <Tags :data-source.sync="tags"/>
             <Notes/>
             <Types/>
             <NumPanel/>
