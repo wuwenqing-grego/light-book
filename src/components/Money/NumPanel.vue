@@ -62,7 +62,7 @@
         }
 
         enter() {
-            console.log('submit')
+            this.$emit('update:value', this.output)
         }
     }
 </script>
