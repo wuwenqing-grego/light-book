@@ -4,13 +4,13 @@
             <Tags :data-source.sync="tags" @update:value="onUpdateSelectedTags"/>
             <Notes @update:value="onUpdateNote"/>
             <Types @update:value="onUpdateType"/>
-            <NumPanel @update:value="onUpdateAmount"/>
+            <NumPanel @update:value="onUpdateAmount" @submit="saveRecord"/>
         </Layout>
     </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
@@ -32,9 +32,11 @@ export default class Money extends Vue {
     record: Record = {
         tags: [],
         note: '',
-        type: '',
+        type: '-',
         amount: 0
     }
+
+    recordList: Record[] = []
     
     onUpdateSelectedTags(value: string[]) {
         this.record.tags = value
@@ -50,6 +52,16 @@ export default class Money extends Vue {
 
     onUpdateAmount(value: string) {
         this.record.amount = parseFloat(value)
+    }
+
+    saveRecord() {
+        const clone = JSON.parse(JSON.stringify(this.record))
+        this.recordList.push(clone)
+    }
+
+    @Watch('recordList')
+    onRecordListChange() {
+        window.localStorage.setItem('recordList', JSON.stringify(this.recordList))
     }
 }
 </script>
