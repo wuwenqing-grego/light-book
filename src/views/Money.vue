@@ -16,26 +16,40 @@ import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
 import NumPanel from '@/components/Money/NumPanel.vue'
 
+type Record = {
+    tags: string[];
+    note: string;
+    type: string;
+    amount: number;
+}
+
 @Component({
     components: { Tags, Notes, Types, NumPanel}
 })
 export default class Money extends Vue {
     tags: string[] = ['衣', '食', '住', '行', '吃', '喝', '玩', '乐']
+
+    record: Record = {
+        tags: [],
+        note: '',
+        type: '',
+        amount: 0
+    }
     
     onUpdateSelectedTags(value: string[]) {
-        console.log(value)
+        this.record.tags = value
     }
 
     onUpdateNote(value: string) {
-        console.log(value)
+        this.record.note = value
     }
 
     onUpdateType(value: string) {
-        console.log(value)
+        this.record.type = value
     }
 
     onUpdateAmount(value: string) {
-        console.log(value)
+        this.record.amount = parseFloat(value)
     }
 }
 </script>
