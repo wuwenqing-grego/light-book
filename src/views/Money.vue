@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <Layout class-prefix="layout">
-            <!-- {{recordList}} -->
-            <Tags :data-source.sync="tags" @update:value="onUpdateSelectedTags"/>
-            <Notes @update:value="onUpdateNote"/>
-            <Types @update:value="onUpdateType"/>
-            <NumPanel @update:value="onUpdateAmount" @submit="saveRecord"/>
-        </Layout>
-    </div>
+    <Layout class-prefix="layout">
+        <!-- {{recordList}} -->
+        <Tags :data-source.sync="tags" @update:value="onUpdateSelectedTags"/>
+        <Notes @update:value="onUpdateNote"/>
+        <Types @update:value="onUpdateType"/>
+        <NumPanel @update:value="onUpdateAmount" @submit="saveRecord"/>
+    </Layout>
 </template>
 
 <script lang="ts">
