@@ -1,6 +1,7 @@
 <template>
     <div>
         <Layout class-prefix="layout">
+            <!-- {{recordList}} -->
             <Tags :data-source.sync="tags" @update:value="onUpdateSelectedTags"/>
             <Notes @update:value="onUpdateNote"/>
             <Types @update:value="onUpdateType"/>
@@ -15,14 +16,7 @@ import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
 import NumPanel from '@/components/Money/NumPanel.vue'
-
-type Record = {
-    tags: string[];
-    note: string;
-    type: string;
-    amount: number;
-    createdAt?: Date;
-}
+import model from '@/model.ts'
 
 @Component({
     components: { Tags, Notes, Types, NumPanel}
@@ -30,14 +24,14 @@ type Record = {
 export default class Money extends Vue {
     tags: string[] = ['衣', '食', '住', '行', '吃', '喝', '玩', '乐']
 
-    record: Record = {
+    record: RecordItem = {
         tags: [],
         note: '',
         type: '-',
         amount: 0,
     }
-
-    recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]')
+    
+    recordList: RecordItem[] = model.fetch()
     
     onUpdateSelectedTags(value: string[]) {
         this.record.tags = value
@@ -56,14 +50,14 @@ export default class Money extends Vue {
     }
 
     saveRecord() {
-        const clone: Record = JSON.parse(JSON.stringify(this.record))
+        const clone: RecordItem = model.clone(this.record)
         clone.createdAt = new Date()
         this.recordList.push(clone)
     }
 
     @Watch('recordList')
     onRecordListChange() {
-        window.localStorage.setItem('recordList', JSON.stringify(this.recordList))
+        model.save(this.recordList)
     }
 }
 </script>

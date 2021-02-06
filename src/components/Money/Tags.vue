@@ -16,7 +16,7 @@
 
     @Component
     export default class Tags extends Vue{
-        @Prop(Array) readonly dataSource: string[]
+        @Prop(Array) readonly dataSource!: string[]
         selectedTags: string[] = []
 
         toggle(tag: string) {
