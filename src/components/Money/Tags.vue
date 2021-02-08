@@ -1,9 +1,9 @@
 <template>
     <div class="tags">
         <ul class="list">
-            <li v-for="tag in dataSource" :key="tag" 
+            <li v-for="tag in dataSource" :key="tag.id" 
             :class="{selected: selectedTags.includes(tag)}"
-            @click="toggle(tag)">{{ tag }}</li>
+            @click="toggle(tag)">{{ tag.name }}</li>
         </ul>
         <div class="new">
             <button @click="create">新增标签</button>
