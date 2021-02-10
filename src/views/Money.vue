@@ -2,7 +2,7 @@
     <Layout class-prefix="layout">
         <!-- {{recordList}} -->
         <Tags :data-source.sync="tags" @update:value="onUpdateSelectedTags"/>
-        <Notes @update:value="onUpdateNote"/>
+        <Notes field-name="备注" placeholder-content="在这里输入备注" @update:value="onUpdateNote"/>
         <Types @update:value="onUpdateType"/>
         <NumPanel @update:value="onUpdateAmount" @submit="saveRecord"/>
     </Layout>

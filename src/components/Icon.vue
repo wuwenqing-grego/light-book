@@ -9,6 +9,7 @@
     import '@/assets/icons/gold-coin.svg'
     import '@/assets/icons/balance-list.svg'
     import '@/assets/icons/arrow.svg'
+    import '@/assets/icons/arrow-left.svg'
 
     export default {
         props: ['iconName']
