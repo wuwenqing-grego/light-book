@@ -4,7 +4,12 @@
             <Icon icon-name="#arrow-left"/>
             <span>编辑标签</span>
         </nav>
-        <Notes :value="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
+        <div class="form-wrapper">
+            <Notes :value="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
+        </div>
+        <div class="button-wrapper">
+            <Button>删除标签</Button>
+        </div>
     </Layout>
 </template>
 
@@ -12,9 +17,10 @@
     import { Vue, Component } from 'vue-property-decorator'
     import tagListModel from '@/models/tagListModel.ts'
     import Notes from '@/components/Money/Notes.vue'
+    import Button from '@/components/Button.vue'
 
     @Component({
-        components: { Notes }
+        components: { Notes, Button }
     })
     export default class EditLabel extends Vue {
         tag?: { id: string; name: string } = undefined
