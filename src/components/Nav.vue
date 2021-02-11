@@ -43,7 +43,7 @@ nav {
     }
 
     .selected {
-        color: red;
+        color: #42b883;
     }
 }
 </style>

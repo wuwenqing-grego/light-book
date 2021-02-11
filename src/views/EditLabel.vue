@@ -1,8 +1,9 @@
 <template>
     <Layout>
         <nav>
-            <Icon icon-name="#arrow-left"/>
+            <Icon icon-name="#arrow-left" class="back"/>
             <span>编辑标签</span>
+            <span class="back"></span>
         </nav>
         <div class="form-wrapper">
             <Notes :value="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
@@ -44,5 +45,26 @@
 </script>
 
 <style lang="scss" scoped>
+nav {
+    background: #f5f5f5;
+    font-size: 16px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+    .back {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.form-wrapper {
+    margin-top: 16px;
+}
+
+.button-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
 </style>
