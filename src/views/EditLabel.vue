@@ -64,7 +64,16 @@
         }
 
         remove() {
-            console.log('remove')
+            if (window.confirm('是否确认删除？')) {
+                if (this.tag) {
+                    if (tagListModel.remove(this.tag.id)) {
+                        window.alert('删除成功！')
+                        this.$router.back()
+                    } else {
+                        window.alert('删除失败！')
+                    }
+                }
+            }
         }
 
         goBack() {
