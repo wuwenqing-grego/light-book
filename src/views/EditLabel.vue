@@ -9,7 +9,8 @@
             <Notes :field-content="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
         </div>
         <div class="button-wrapper">
-            <Button @click="remove">删除标签</Button>
+            <Button @click.native="confirm">确认更改</Button>
+            <Button @click.native="remove">删除标签</Button>
         </div>
     </Layout>
 </template>
@@ -25,6 +26,7 @@
     })
     export default class EditLabel extends Vue {
         tag?: { id: string; name: string } = undefined
+        cache = ''
         
         created() {
             const id = this.$route.params.id
@@ -33,14 +35,31 @@
 
             if (currTag) {
                 this.tag = currTag
+                this.cache = currTag.name
             } else {
                 this.$router.replace('/404')
             }
         }
 
         update(name: string) {
-            if (this.tag) {
-                tagListModel.update(this.tag.id, name)
+            this.cache = name
+        }
+
+        confirm() {
+            if (window.confirm('是否确认更改？')) {
+                if (this.cache === '') {
+                    window.alert('标签名不能为空！')
+                } else if (this.tag) {
+                    const msg = tagListModel.update(this.tag.id, this.cache)
+
+                    if (msg === 'duplicated') {
+                        window.alert('标签名已被使用！')
+                    } else if (msg === 'success') {
+                        window.alert('标签修改成功！')
+                    } else {
+                        window.alert('标签不存在！')
+                    }
+                }
             }
         }
 
@@ -76,5 +95,7 @@ nav {
 .button-wrapper {
     text-align: center;
     margin-top: 40px;
+    display: flex;
+    justify-content: space-evenly;
 }
 </style>
