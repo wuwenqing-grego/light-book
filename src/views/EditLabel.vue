@@ -1,15 +1,15 @@
 <template>
     <Layout>
         <nav>
-            <Icon icon-name="#arrow-left" class="back"/>
+            <Icon icon-name="#arrow-left" class="back" @click.native="goBack"/>
             <span>编辑标签</span>
             <span class="back"></span>
         </nav>
         <div class="form-wrapper">
-            <Notes :value="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
+            <Notes :field-content="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
         </div>
         <div class="button-wrapper">
-            <Button>删除标签</Button>
+            <Button @click="remove">删除标签</Button>
         </div>
     </Layout>
 </template>
@@ -38,8 +38,18 @@
             }
         }
 
-        update() {
-            console.log('update')
+        update(name: string) {
+            if (this.tag) {
+                tagListModel.update(this.tag.id, name)
+            }
+        }
+
+        remove() {
+            console.log('remove')
+        }
+
+        goBack() {
+            this.$router.back()
         }
     }
 </script>
