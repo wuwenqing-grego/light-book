@@ -1,3 +1,5 @@
+import createId from '@/lib/createId.ts'
+
 const KEY = 'tagList'
 
 type Tag = {
@@ -26,7 +28,7 @@ const tagListModel: TagListModel = {
         const names = this.data.map(item => item.name)
         if (names.includes(name)) {return 'duplicated'}
 
-        const id = this.data.length + ''
+        const id = createId().toString()
         this.data.push({id, name})
         this.save()
         return 'success'
