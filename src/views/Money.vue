@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
@@ -50,11 +50,6 @@ export default class Money extends Vue {
 
     saveRecord() {
         recordListModel.create(this.record)
-    }
-
-    @Watch('recordList')
-    onRecordListChange() {
-        recordListModel.save()
     }
 }
 </script>
