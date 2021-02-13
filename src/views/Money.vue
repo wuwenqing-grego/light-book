@@ -49,14 +49,12 @@ export default class Money extends Vue {
     }
 
     saveRecord() {
-        const clone: RecordItem = recordListModel.clone(this.record)
-        clone.createdAt = new Date()
-        this.recordList.push(clone)
+        recordListModel.create(this.record)
     }
 
     @Watch('recordList')
     onRecordListChange() {
-        recordListModel.save(this.recordList)
+        recordListModel.save()
     }
 }
 </script>
