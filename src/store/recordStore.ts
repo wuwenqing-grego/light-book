@@ -6,6 +6,8 @@ type recordState = {
 }
 
 export default {
+    namespaced: true,
+
     state: {
         recordList: []
     },
@@ -19,7 +21,7 @@ export default {
             const copyRecord: RecordItem = clone(record)
             copyRecord.createdAt = new Date()
             state.recordList.push(copyRecord)
-            store.commit('save')
+            store.commit('record/save')
         },
     
         save(state: recordState) {

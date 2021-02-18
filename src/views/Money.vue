@@ -27,7 +27,7 @@ export default class Money extends Vue {
     }
 
     created() {
-        this.$store.commit('fetch')
+        this.$store.commit('record/fetch')
     }
 
     record: RecordItem = {
@@ -54,7 +54,7 @@ export default class Money extends Vue {
     }
 
     saveRecord() {
-        this.$store.commit('create', this.record)
+        this.$store.commit('record/create', this.record)
     }
 }
 </script>

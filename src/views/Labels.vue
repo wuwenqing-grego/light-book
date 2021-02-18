@@ -21,20 +21,20 @@
         components: { Button }
     })
     export default class Labels extends Vue {
-        tags = tagListModel.fetch()
+        get tags() {
+            return this.$store.state.tag.tagList
+        }
+
+        created() {
+            this.$store.commit('tag/fetch')
+        }
         
         createTag() {
             const name = window.prompt('请输入标签名：')
             if (name === '') {
                 window.alert('标签名不能为空！')
             } else if (name) {
-                const msg = tagListModel.create(name)
-
-                if (msg === 'duplicated') {
-                    window.alert('标签名已被使用！')
-                } else if (msg === 'success') {
-                    window.alert('标签添加成功！')
-                }
+                this.$store.commit('tag/create', name)
             }
         }
     }
