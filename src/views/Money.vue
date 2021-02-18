@@ -14,7 +14,6 @@ import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
 import NumPanel from '@/components/Money/NumPanel.vue'
-import recordListModel from '@/models/recordListModel.ts'
 import tagListModel from '@/models/tagListModel.ts'
 
 @Component({
@@ -23,14 +22,20 @@ import tagListModel from '@/models/tagListModel.ts'
 export default class Money extends Vue {
     tags = tagListModel.fetch()
 
+    get recordList() {
+        return this.$store.state.record.recordList
+    }
+
+    created() {
+        this.$store.commit('fetch')
+    }
+
     record: RecordItem = {
         tags: [],
         note: '',
         type: '-',
         amount: 0,
     }
-    
-    recordList = recordListModel.fetch()
     
     onUpdateSelectedTags(value: string[]) {
         this.record.tags = value
@@ -49,7 +54,7 @@ export default class Money extends Vue {
     }
 
     saveRecord() {
-        recordListModel.create(this.record)
+        this.$store.commit('create', this.record)
     }
 }
 </script>
