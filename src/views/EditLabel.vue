@@ -6,7 +6,7 @@
             <span class="back"></span>
         </nav>
         <div class="form-wrapper">
-            <Notes :field-content="tag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
+            <Notes :field-content="currTag.name" field-name="标签名" placeholder-content="在这里输入标签名" @update:value="update"/>
         </div>
         <div class="button-wrapper">
             <Button @click.native="confirm">确认更改</Button>
@@ -17,7 +17,6 @@
 
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator'
-    import tagListModel from '@/models/tagListModel.ts'
     import Notes from '@/components/Money/Notes.vue'
     import Button from '@/components/Button.vue'
 
@@ -25,18 +24,18 @@
         components: { Notes, Button }
     })
     export default class EditLabel extends Vue {
-        tag?: { id: string; name: string } = undefined
         cache = ''
+
+        get currTag() {
+            return this.$store.state.tag.currTag
+        }
         
         created() {
             const id = this.$route.params.id
-            const tags = tagListModel.fetch()
-            const currTag = tags.filter(item => item.id === id)[0]
+            this.$store.commit('tag/fetch')
+            this.$store.commit('tag/setCurrTag', id)
 
-            if (currTag) {
-                this.tag = currTag
-                this.cache = currTag.name
-            } else {
+            if (!this.currTag) {
                 this.$router.replace('/404')
             }
         }
@@ -49,29 +48,17 @@
             if (window.confirm('是否确认更改？')) {
                 if (this.cache === '') {
                     window.alert('标签名不能为空！')
-                } else if (this.tag) {
-                    const msg = tagListModel.update(this.tag.id, this.cache)
-
-                    if (msg === 'duplicated') {
-                        window.alert('标签名已被使用！')
-                    } else if (msg === 'success') {
-                        window.alert('标签修改成功！')
-                    } else {
-                        window.alert('标签不存在！')
-                    }
+                } else if (this.currTag) {
+                    this.$store.commit('tag/update', {id: this.currTag.id, name: this.cache})
                 }
             }
         }
 
         remove() {
             if (window.confirm('是否确认删除？')) {
-                if (this.tag) {
-                    if (tagListModel.remove(this.tag.id)) {
-                        window.alert('删除成功！')
-                        this.$router.back()
-                    } else {
-                        window.alert('删除失败！')
-                    }
+                if (this.currTag) {
+                    this.$store.commit('tag/remove', this.currTag.id)
+                    this.$router.back()
                 }
             }
         }

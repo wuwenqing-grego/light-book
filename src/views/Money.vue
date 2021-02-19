@@ -14,7 +14,6 @@ import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Types from '@/components/Money/Types.vue'
 import NumPanel from '@/components/Money/NumPanel.vue'
-import tagListModel from '@/models/tagListModel.ts'
 
 @Component({
     components: { Tags, Notes, Types, NumPanel }
