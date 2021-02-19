@@ -14,28 +14,15 @@
 
 <script lang="ts">
     import { Vue, Component } from 'vue-property-decorator'
+    import { mixins } from 'vue-class-component'
     import Button from '@/components/Button.vue'
+    import TagHelper from '@/mixins/TagHelper'
 
     @Component({
         components: { Button }
     })
-    export default class Labels extends Vue {
-        get tags() {
-            return this.$store.state.tag.tagList
-        }
-
-        created() {
-            this.$store.commit('tag/fetch')
-        }
+    export default class Labels extends mixins(TagHelper) {
         
-        createTag() {
-            const name = window.prompt('请输入标签名：')
-            if (name === '') {
-                window.alert('标签名不能为空！')
-            } else if (name) {
-                this.$store.commit('tag/create', name)
-            }
-        }
     }
 </script>
 
