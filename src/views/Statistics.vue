@@ -8,22 +8,17 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Tabs from '@/components/Money/Tabs.vue'
+import recordTypeList from '@/constants/recordTypeList'
+import intervalList from '@/constants/intervalList'
 
 @Component({
     components: { Tabs }
 })
 export default class Statistics extends Vue {
     type = '-'
-    recordTypeList = [
-        {text: '支出', value: '-'},
-        {text: '收入', value: '+'},
-    ]
+    recordTypeList = recordTypeList
     interval = 'day'
-    intervalList = [
-        {text: '按天', value: 'day'},
-        {text: '按周', value: 'week'},
-        {text: '按月', value: 'month'},
-    ]
+    intervalList = intervalList
 }
 </script>
 

@@ -15,7 +15,7 @@
     type TabItem = { text: string; value: string }
 
     @Component
-    export default class Types extends Vue {
+    export default class Tabs extends Vue {
         @Prop({required: true, type: Array}) tabList!: TabItem[]
         @Prop(String) readonly value!: string
         @Prop(String) classPrefix?: string

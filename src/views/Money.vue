@@ -3,7 +3,7 @@
         <!-- {{recordList}} -->
         <Tags @update:value="onUpdateSelectedTags"/>
         <Notes field-name="备注" placeholder-content="在这里输入备注" @update:value="onUpdateNote"/>
-        <Types @update:value="onUpdateType"/>
+        <Tabs :tab-list="recordTypeList" :value.sync="record.type"/>
         <NumPanel @update:value="onUpdateAmount" @submit="saveRecord"/>
     </Layout>
 </template>
@@ -12,11 +12,12 @@
 import { Vue, Component } from 'vue-property-decorator'
 import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
-import Types from '@/components/Money/Types.vue'
+import Tabs from '@/components/Money/Tabs.vue'
 import NumPanel from '@/components/Money/NumPanel.vue'
+import recordTypeList from '@/constants/recordTypeList'
 
 @Component({
-    components: { Tags, Notes, Types, NumPanel }
+    components: { Tags, Notes, Tabs, NumPanel }
 })
 export default class Money extends Vue {
     get recordList() {
@@ -33,6 +34,8 @@ export default class Money extends Vue {
         type: '-',
         amount: 0,
     }
+
+    recordTypeList = recordTypeList
     
     onUpdateSelectedTags(value: string[]) {
         this.record.tags = value
@@ -40,10 +43,6 @@ export default class Money extends Vue {
 
     onUpdateNote(value: string) {
         this.record.note = value
-    }
-
-    onUpdateType(value: string) {
-        this.record.type = value
     }
 
     onUpdateAmount(value: string) {
