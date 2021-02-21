@@ -1,11 +1,6 @@
 import createId from '@/lib/createId.ts'
 import store from '.'
 
-type Tag = {
-    id: string;
-    name: string;
-}
-
 type TagStore = {
     tagList: Tag[];
     currTag: Tag;

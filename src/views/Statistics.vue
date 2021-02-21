@@ -7,7 +7,7 @@
                 <h3>{{date}}</h3>
                 <ol>
                     <li v-for="record in records" :key="record.id">
-                        <span>{{record.tags}}</span>
+                        <span>{{record.tags[0].name}}</span>
                         <span>{{record.note}}</span>
                         <span>￥{{record.amount}}</span>
                     </li>

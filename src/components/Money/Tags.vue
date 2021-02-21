@@ -18,9 +18,9 @@
 
     @Component
     export default class Tags extends mixins(TagHelper) {
-        selectedTags: string[] = []
+        selectedTags: Tag[] = []
 
-        toggle(tag: string) {
+        toggle(tag: Tag) {
             const index = this.selectedTags.indexOf(tag)
             index >= 0 ? this.selectedTags.splice(index, 1) : this.selectedTags.push(tag)
             this.$emit('update:value', this.selectedTags)
