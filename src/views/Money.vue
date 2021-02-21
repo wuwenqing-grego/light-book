@@ -10,24 +10,18 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { mixins } from 'vue-class-component'
 import Tags from '@/components/Money/Tags.vue'
 import Notes from '@/components/Money/Notes.vue'
 import Tabs from '@/components/Money/Tabs.vue'
 import NumPanel from '@/components/Money/NumPanel.vue'
 import recordTypeList from '@/constants/recordTypeList'
+import RecordHelper from '@/mixins/RecordHelper'
 
 @Component({
     components: { Tags, Notes, Tabs, NumPanel }
 })
-export default class Money extends Vue {
-    get recordList() {
-        return this.$store.state.record.recordList
-    }
-
-    created() {
-        this.$store.commit('record/fetch')
-    }
-
+export default class Money extends mixins(RecordHelper) {
     record: RecordItem = {
         tags: [],
         note: '',
