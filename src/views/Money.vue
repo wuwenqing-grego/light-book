@@ -31,7 +31,7 @@ export default class Money extends mixins(RecordHelper) {
 
     recordTypeList = recordTypeList
     
-    onUpdateSelectedTags(value: string[]) {
+    onUpdateSelectedTags(value: Tag[]) {
         this.record.tags = value
     }
 
