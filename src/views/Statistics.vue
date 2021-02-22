@@ -4,7 +4,7 @@
         <Tabs class-prefix="interval" :tab-list="intervalList" :value.sync="interval"/>
         <ol>
             <li v-for="(records, date) in sortedRecordList" :key="date">
-                <h3 class="title">{{date}}</h3>
+                <h3 class="title">{{beautify(date)}}</h3>
                 <ol>
                     <li v-for="record in records" :key="record.id" class="record">
                         <span>{{tagString(record.tags)}}</span>
@@ -25,6 +25,7 @@ import recordTypeList from '@/constants/recordTypeList'
 import intervalList from '@/constants/intervalList'
 import RecordHelper from '@/mixins/RecordHelper'
 import clone from '@/lib/clone'
+import dayjs from 'dayjs'
 
 @Component({
     components: { Tabs }
@@ -39,13 +40,33 @@ export default class Statistics extends mixins(RecordHelper) {
         return tags.length ? tags.map(tag => tag.name).join(', ') : '无'
     }
 
+    beautify(dateStr: string) {
+        const day = dayjs(dateStr)
+        const now = dayjs()
+
+        if (day.isSame(now, 'day')) {
+            return '今天'
+        } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
+            return '昨天'
+        } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+            return '前天'
+        } else if (day.isSame(now, 'year')) {
+            return day.format('M月D日')
+        } else {
+            return day.format('YYYY年M月D日')
+        }
+    }
+
     get sortedRecordList() {
         if (!this.recordList.length) {return []}
 
         const newList = clone(this.recordList)
+            .filter((record: RecordItem) => record.type === this.type)
+            .sort((a: RecordItem, b: RecordItem) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf())
+
         const map: { [key: string]: RecordItem[] } = {}
         for (const record of newList) {
-            const date = record.createdAt.split('T')[0]
+            const date = dayjs(record.createdAt).format('YYYY-MM-DD')
             map[date] = map[date] || []
             map[date].push(record)
         }
