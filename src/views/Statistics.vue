@@ -4,7 +4,7 @@
         <Tabs class-prefix="interval" :tab-list="intervalList" :value.sync="interval"/>
         <ol>
             <li v-for="(records, date) in sortedRecordList" :key="date">
-                <h3 class="title">{{beautify(date)}}</h3>
+                <h3 class="title">{{beautify(date)}} <span>￥{{getTotal(records)}}</span> </h3>
                 <ol>
                     <li v-for="record in records" :key="record.id" class="record">
                         <span>{{tagString(record.tags)}}</span>
@@ -38,6 +38,10 @@ export default class Statistics extends mixins(RecordHelper) {
 
     tagString(tags: Tag[]) {
         return tags.length ? tags.map(tag => tag.name).join(', ') : '无'
+    }
+
+    getTotal(records: RecordItem[]) {
+        return records.reduce((prev, curr) => prev + curr.amount, 0)
     }
 
     beautify(dateStr: string) {
