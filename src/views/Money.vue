@@ -1,6 +1,5 @@
 <template>
     <Layout class-prefix="layout">
-        <!-- {{recordList}} -->
         <Tags @update:value="onUpdateSelectedTags"/>
         <Notes field-name="备注" placeholder-content="在这里输入备注" @update:value="onUpdateNote"/>
         <Tabs :tab-list="recordTypeList" :value.sync="record.type"/>
@@ -49,13 +48,9 @@ export default class Money extends mixins(RecordHelper) {
 }
 </script>
 
-<style lang="scss">
-.layout-content {
+<style lang="scss" scoped>
+::v-deep .layout-content {
     display: flex;
     flex-direction: column;
 }
-
-// .layout-wrapper {
-//     border: 1px solid blue;
-// }
 </style>

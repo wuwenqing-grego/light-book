@@ -52,7 +52,8 @@
             margin-top: 4px;
 
             &.selected {
-                background: darken(#d9d9d9, 50%);
+                // background: darken(#d9d9d9, 50%);
+                background: #42b883;
                 color: white;
             }
         }
