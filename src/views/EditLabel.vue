@@ -10,7 +10,7 @@
         </div>
         <div class="button-wrapper">
             <Button @click.native="confirm">确认更改</Button>
-            <Button @click.native="remove">删除标签</Button>
+            <Button @click.native="remove" class-prefix="delete">删除标签</Button>
         </div>
     </Layout>
 </template>
@@ -93,5 +93,11 @@ nav {
     margin-top: 40px;
     display: flex;
     justify-content: space-evenly;
+}
+
+::v-deep {
+    .delete-button {
+        background: red;
+    }
 }
 </style>

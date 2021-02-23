@@ -1,15 +1,15 @@
 <template>
-    <button class="button">
+    <button class="button" :class="{[classPrefix + '-button']: classPrefix}">
         <slot/>
     </button>
 </template>
 
 <script lang="ts">
-    import { Vue, Component } from 'vue-property-decorator'
+    import { Vue, Component, Prop } from 'vue-property-decorator'
 
     @Component
     export default class Button extends Vue {
-        
+        @Prop(String) classPrefix?: string
     }
 </script>
 
