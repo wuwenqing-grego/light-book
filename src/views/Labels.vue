@@ -1,11 +1,12 @@
 <template>
     <Layout>
-        <div class="tags">
+        <div class="tags" v-if="tags.length">
             <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
                 <span>{{tag.name}}</span>
                 <Icon icon-name="#arrow"/>
             </router-link>
         </div>
+        <div v-else class="no-tag">快来添加第一个标签吧！</div>
         <div class="newTag-wrapper">
             <Button @click.native="createTag">新建标签</Button>
         </div>
@@ -61,5 +62,11 @@
         height: 40px;
         padding: 0 16px;
     }
+}
+
+.no-tag {
+    padding-top: 40px;
+    font-size: 20px;
+    text-align: center;
 }
 </style>
