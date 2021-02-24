@@ -2,18 +2,19 @@
     <Layout>
         <Tabs class-prefix="type" :tab-list="recordTypeList" :value.sync="type"/>
         <Tabs class-prefix="interval" :tab-list="intervalList" :value.sync="interval"/>
-        <ol>
+        <ol v-if="Object.keys(sortedRecordList).length">
             <li v-for="(records, date) in sortedRecordList" :key="date">
                 <h3 class="title">{{beautify(date)}} <span>￥{{getTotal(records)}}</span> </h3>
                 <ol>
                     <li v-for="record in records" :key="record.id" class="record">
-                        <span>{{tagString(record.tags)}}</span>
+                        <span>{{tagString(record.tags, record.type)}}</span>
                         <span class="note">{{record.note}}</span>
                         <span>￥{{record.amount}}</span>
                     </li>
                 </ol>
             </li>
         </ol>
+        <div v-else class="no-record">快去添加第一笔记账吧！</div>
     </Layout>
 </template>
 
@@ -36,8 +37,8 @@ export default class Statistics extends mixins(RecordHelper) {
     interval = 'day'
     intervalList = intervalList
 
-    tagString(tags: Tag[]) {
-        return tags.length ? tags.map(tag => tag.name).join(', ') : '无'
+    tagString(tags: Tag[], type: string) {
+        return tags.length ? tags.map(tag => tag.name).join('，') : (type === '+' ? '收入' : '支出')
     }
 
     getTotal(records: RecordItem[]) {
@@ -62,7 +63,7 @@ export default class Statistics extends mixins(RecordHelper) {
     }
 
     get sortedRecordList() {
-        if (!this.recordList.length) {return []}
+        if (!this.recordList.length) {return {}}
 
         const newList = clone(this.recordList)
             .filter((record: RecordItem) => record.type === this.type)
@@ -114,5 +115,11 @@ export default class Statistics extends mixins(RecordHelper) {
     margin-left: 16px;
     margin-right: auto;
     color: #999;
+}
+
+.no-record {
+    padding: 16px;
+    font-size: 20px;
+    text-align: center;
 }
 </style>
