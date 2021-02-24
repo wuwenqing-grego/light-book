@@ -22,6 +22,7 @@ export default {
             copyRecord.createdAt = new Date()
             state.recordList.push(copyRecord)
             store.commit('record/save')
+            window.alert('成功添加一笔记账！')
         },
     
         save(state: recordState) {

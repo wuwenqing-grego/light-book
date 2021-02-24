@@ -44,6 +44,7 @@ export default class Money extends mixins(RecordHelper) {
 
     saveRecord() {
         this.$store.commit('record/create', this.record)
+        this.$router.go(0)
     }
 }
 </script>
