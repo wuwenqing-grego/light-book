@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/light-book-dist/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/light-book/' : '/',
 
   lintOnSave: false,
 
