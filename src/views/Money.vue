@@ -1,5 +1,5 @@
 <template>
-    <Layout class-prefix="layout">
+    <Layout class-prefix="layout" :style="{height: vh + 'px'}">
         <Tags @update:value="onUpdateSelectedTags"/>
         <Notes field-name="备注" placeholder-content="在这里输入备注" @update:value="onUpdateNote"/>
         <Tabs :tab-list="recordTypeList" :value.sync="record.type"/>
@@ -21,6 +21,8 @@ import RecordHelper from '@/mixins/RecordHelper'
     components: { Tags, Notes, Tabs, NumPanel }
 })
 export default class Money extends mixins(RecordHelper) {
+    vh = document.documentElement.clientHeight
+
     record: RecordItem = {
         tags: [],
         note: '',
