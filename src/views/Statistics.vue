@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <Tabs class-prefix="type" :tab-list="recordTypeList" :value.sync="type"/>
-        <Tabs class-prefix="interval" :tab-list="intervalList" :value.sync="interval"/>
+        <!-- <Tabs class-prefix="interval" :tab-list="intervalList" :value.sync="interval"/> -->
         <ol v-if="Object.keys(sortedRecordList).length">
             <li v-for="(records, date) in sortedRecordList" :key="date">
                 <h3 class="title">{{beautify(date)}} <span>￥{{getTotal(records)}}</span> </h3>
